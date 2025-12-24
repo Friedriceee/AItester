@@ -1,0 +1,564 @@
+{
+  "version": "1.0",
+  "meta": {
+    "url": "https://mp-t.mallcoo.cn/Mall/MallQAList?mallID=10296&groupID=6",
+    "startedAt": 1766545706302,
+    "finishedAt": 1766545852974
+  },
+  "steps": [
+    {
+      "type": "navigation",
+      "url": "https://mp-t.mallcoo.cn/a/passport/?callbackUrl=%2f%2fmp-t.mallcoo.cn%2fMall%2fMallQAList%3fmallID%3d10296%26groupID%3d6",
+      "ts": 1766545706650
+    },
+    {
+      "type": "navigation",
+      "url": "https://mp-t.mallcoo.cn/a/passport/?callbackUrl=%2f%2fmp-t.mallcoo.cn%2fMall%2fMallQAList%3fmallID%3d10296%26groupID%3d6",
+      "ts": 1766545707240
+    },
+    {
+      "type": "navigation",
+      "url": "https://mp-t.mallcoo.cn/a/passport/login?callbackUrl=%2F%2Fmp-t.mallcoo.cn%2FMall%2FMallQAList%3FmallID%3D10296%26groupID%3D6",
+      "ts": 1766545707240
+    },
+    {
+      "type": "click",
+      "selector": "input.el-input__inner",
+      "x": 749,
+      "y": 250,
+      "ts": 1766545712328
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "c",
+      "ts": 1766545713046
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "c s",
+      "ts": 1766545713120
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs",
+      "ts": 1766545713671
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs_",
+      "ts": 1766545714288
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs_w",
+      "ts": 1766545714830
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs_wq",
+      "ts": 1766545714902
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs_wqy",
+      "ts": 1766545714957
+    },
+    {
+      "type": "click",
+      "selector": "input.el-input__inner",
+      "x": 703,
+      "y": 325,
+      "ts": 1766545716093
+    },
+    {
+      "type": "click",
+      "selector": "input.el-input__inner",
+      "x": 742,
+      "y": 337,
+      "ts": 1766545750300
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "tBjoEpVWAx8ou_IU312",
+      "ts": 1766545750573
+    },
+    {
+      "type": "click",
+      "selector": "button.el-button.login-button.el-button--primary",
+      "x": 761,
+      "y": 456,
+      "ts": 1766545751148
+    },
+    {
+      "type": "navigation",
+      "url": "https://mp-t.mallcoo.cn/Mall/MallQAList?mallID=10296&groupID=6",
+      "ts": 1766545751880
+    },
+    {
+      "type": "click",
+      "selector": "#btnAddFeedback",
+      "x": 962,
+      "y": 390,
+      "ts": 1766545772486
+    },
+    {
+      "type": "click",
+      "selector": "#CallName",
+      "x": 620,
+      "y": 134,
+      "ts": 1766545773680
+    },
+    {
+      "type": "input",
+      "selector": "#CallName",
+      "value": "w",
+      "ts": 1766545776495
+    },
+    {
+      "type": "input",
+      "selector": "#CallName",
+      "value": "wa",
+      "ts": 1766545780116
+    },
+    {
+      "type": "input",
+      "selector": "#CallName",
+      "value": "wan",
+      "ts": 1766545780189
+    },
+    {
+      "type": "input",
+      "selector": "#CallName",
+      "value": "wang",
+      "ts": 1766545780317
+    },
+    {
+      "type": "click",
+      "selector": "#phonNumber",
+      "x": 643,
+      "y": 171,
+      "ts": 1766545781362
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "1",
+      "ts": 1766545782286
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "15",
+      "ts": 1766545782349
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "153",
+      "ts": 1766545782446
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "1539",
+      "ts": 1766545782765
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "15395",
+      "ts": 1766545782886
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "153956",
+      "ts": 1766545783133
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "1539566",
+      "ts": 1766545783294
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "15395666",
+      "ts": 1766545783437
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "153956666",
+      "ts": 1766545783590
+    },
+    {
+      "type": "click",
+      "selector": "#txtContent",
+      "x": 637,
+      "y": 234,
+      "ts": 1766545784695
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "f",
+      "ts": 1766545794826
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa",
+      "ts": 1766545794907
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa p",
+      "ts": 1766545795035
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa pi",
+      "ts": 1766545795125
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa pi a",
+      "ts": 1766545795321
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa piao",
+      "ts": 1766545795417
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa piao y",
+      "ts": 1766545796024
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa piao yo",
+      "ts": 1766545796135
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa piao you",
+      "ts": 1766545796237
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa piao you d",
+      "ts": 1766545796562
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa piao you di",
+      "ts": 1766545796663
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa piao you dia",
+      "ts": 1766545796789
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa piao you dian",
+      "ts": 1766545796836
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票有点",
+      "ts": 1766545797759
+    },
+    {
+      "type": "click",
+      "selector": "#confirm_btn_ok",
+      "x": 858,
+      "y": 430,
+      "ts": 1766545798330
+    },
+    {
+      "type": "click",
+      "selector": "button.close",
+      "x": 895,
+      "y": 51,
+      "ts": 1766545799770
+    },
+    {
+      "type": "click",
+      "selector": "#txtContent",
+      "x": 673,
+      "y": 225,
+      "ts": 1766545800289
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票有点m",
+      "ts": 1766545801056
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票有点mo",
+      "ts": 1766545801155
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票有点mo h",
+      "ts": 1766545801270
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票有点mo hu",
+      "ts": 1766545801344
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票有点模糊",
+      "ts": 1766545801821
+    },
+    {
+      "type": "click",
+      "selector": "#confirm_btn_ok",
+      "x": 859,
+      "y": 427,
+      "ts": 1766545802571
+    },
+    {
+      "type": "click",
+      "selector": "button.close",
+      "x": 892,
+      "y": 53,
+      "ts": 1766545803887
+    },
+    {
+      "type": "click",
+      "selector": "#phonNumber",
+      "x": 693,
+      "y": 166,
+      "ts": 1766545804382
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "1539566668",
+      "ts": 1766545804985
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "15395666687",
+      "ts": 1766545805054
+    },
+    {
+      "type": "click",
+      "selector": "#confirm_btn_ok",
+      "x": 871,
+      "y": 448,
+      "ts": 1766545806122
+    },
+    {
+      "type": "click",
+      "selector": "a.btn.default.btn-xs.purple",
+      "x": 1132,
+      "y": 345,
+      "ts": 1766545811695
+    },
+    {
+      "type": "click",
+      "selector": "input",
+      "x": 503,
+      "y": 165,
+      "ts": 1766545812842
+    },
+    {
+      "type": "input",
+      "selector": "input",
+      "value": "103",
+      "ts": 1766545812842
+    },
+    {
+      "type": "click",
+      "selector": "#btnLabPost",
+      "x": 911,
+      "y": 303,
+      "ts": 1766545813662
+    },
+    {
+      "type": "click",
+      "selector": "button.close",
+      "x": 903,
+      "y": 54,
+      "ts": 1766545815152
+    },
+    {
+      "type": "click",
+      "selector": "a.btn.default.btn-xs.purple",
+      "x": 1072,
+      "y": 352,
+      "ts": 1766545816023
+    },
+    {
+      "type": "click",
+      "selector": "td",
+      "x": 731,
+      "y": 353,
+      "ts": 1766545817425
+    },
+    {
+      "type": "click",
+      "selector": "div.col-md-6",
+      "x": 325,
+      "y": 130,
+      "ts": 1766545822353
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "h",
+      "ts": 1766545823189
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "h s",
+      "ts": 1766545823210
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "h sa",
+      "ts": 1766545823303
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "h sao",
+      "ts": 1766545823346
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "hsao h",
+      "ts": 1766545823532
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "hsao ho",
+      "ts": 1766545823615
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "hsao hou",
+      "ts": 1766545823677
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "hsao hou l",
+      "ts": 1766545824075
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "hsao hou li",
+      "ts": 1766545824161
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "hsao hou lia",
+      "ts": 1766545824248
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "hsao hou lian",
+      "ts": 1766545824333
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "hsao hou lian x",
+      "ts": 1766545824448
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "hsao hou lian xi",
+      "ts": 1766545824487
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "hsao hou lian xin",
+      "ts": 1766545824616
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "hsao hou lian xi ni",
+      "ts": 1766545824697
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "hsao hou lian xi nin",
+      "ts": 1766545824808
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "稍后联系您",
+      "ts": 1766545825140
+    },
+    {
+      "type": "click",
+      "selector": "input",
+      "x": 366,
+      "y": 517,
+      "ts": 1766545826054
+    },
+    {
+      "type": "input",
+      "selector": "input",
+      "value": "C:\\fakepath\\90x90_1_0_807.png",
+      "ts": 1766545832073
+    },
+    {
+      "type": "click",
+      "selector": "#btnPost",
+      "x": 1009,
+      "y": 847,
+      "ts": 1766545841218
+    }
+  ]
+}

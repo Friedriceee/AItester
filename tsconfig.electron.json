@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2020",
+    "outDir": "dist/electron",
+    "rootDir": "src",
+    "types": ["node", "electron"]
+  },
+  "include": [
+    "src/electron/**/*",
+    "src/core/**/*"
+  ]
+}

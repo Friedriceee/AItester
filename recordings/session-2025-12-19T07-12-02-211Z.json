@@ -1,0 +1,341 @@
+{
+  "version": "1.0",
+  "meta": {
+    "url": "https://tuan.mp-t.mallcoo.cn/Tuan/TuanEdit/?mallID=10296&groupID=3",
+    "startedAt": 1766128220288,
+    "finishedAt": 1766128322211
+  },
+  "steps": [
+    {
+      "type": "navigation",
+      "url": "https://mp-t.mallcoo.cn/a/passport/?callbackUrl=http%3a%2f%2ftuan.mp-t.mallcoo.cn%2fTuan%2fTuanEdit%2f%3fmallID%3d10296%26groupID%3d3",
+      "ts": 1766128220603
+    },
+    {
+      "type": "navigation",
+      "url": "https://mp-t.mallcoo.cn/a/passport/?callbackUrl=http%3a%2f%2ftuan.mp-t.mallcoo.cn%2fTuan%2fTuanEdit%2f%3fmallID%3d10296%26groupID%3d3",
+      "ts": 1766128221772
+    },
+    {
+      "type": "navigation",
+      "url": "https://mp-t.mallcoo.cn/a/passport/login?callbackUrl=http%3A%2F%2Ftuan.mp-t.mallcoo.cn%2FTuan%2FTuanEdit%2F%3FmallID%3D10296%26groupID%3D3",
+      "ts": 1766128221772
+    },
+    {
+      "type": "click",
+      "selector": "input.el-input__inner",
+      "x": 724,
+      "y": 265,
+      "ts": 1766128222694
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "c",
+      "ts": 1766128223366
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "c s",
+      "ts": 1766128223500
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs",
+      "ts": 1766128223968
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs_",
+      "ts": 1766128224399
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs_w",
+      "ts": 1766128224737
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs_wq",
+      "ts": 1766128224821
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs_wqy",
+      "ts": 1766128224885
+    },
+    {
+      "type": "click",
+      "selector": "input.el-input__inner",
+      "x": 761,
+      "y": 314,
+      "ts": 1766128225528
+    },
+    {
+      "type": "click",
+      "selector": "input.el-input__inner",
+      "x": 983,
+      "y": 321,
+      "ts": 1766128242247
+    },
+    {
+      "type": "click",
+      "selector": "input.el-input__inner",
+      "x": 954,
+      "y": 331,
+      "ts": 1766128242608
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "tBjoEpVWAx8ou_IU312",
+      "ts": 1766128242872
+    },
+    {
+      "type": "click",
+      "selector": "button.el-button.login-button.el-button--primary",
+      "x": 791,
+      "y": 461,
+      "ts": 1766128243155
+    },
+    {
+      "type": "navigation",
+      "url": "http://tuan.mp-t.mallcoo.cn/Tuan/TuanEdit/?mallID=10296&groupID=3",
+      "ts": 1766128244324
+    },
+    {
+      "type": "click",
+      "selector": "#name",
+      "x": 434,
+      "y": 192,
+      "ts": 1766128246566
+    },
+    {
+      "type": "input",
+      "selector": "#name",
+      "value": "c",
+      "ts": 1766128248262
+    },
+    {
+      "type": "input",
+      "selector": "#name",
+      "value": "ce",
+      "ts": 1766128248603
+    },
+    {
+      "type": "input",
+      "selector": "#name",
+      "value": "测",
+      "ts": 1766128248879
+    },
+    {
+      "type": "click",
+      "selector": "#category",
+      "x": 515,
+      "y": 278,
+      "ts": 1766128250735
+    },
+    {
+      "type": "input",
+      "selector": "#category",
+      "value": "155",
+      "ts": 1766128251886
+    },
+    {
+      "type": "click",
+      "selector": "#category",
+      "x": 401,
+      "y": 271,
+      "ts": 1766128251887
+    },
+    {
+      "type": "click",
+      "selector": "#category",
+      "x": 466,
+      "y": 205,
+      "ts": 1766128252473
+    },
+    {
+      "type": "input",
+      "selector": "#category",
+      "value": "163",
+      "ts": 1766128253510
+    },
+    {
+      "type": "click",
+      "selector": "#category",
+      "x": 401,
+      "y": 199,
+      "ts": 1766128253510
+    },
+    {
+      "type": "click",
+      "selector": "div.col-md-9",
+      "x": 398,
+      "y": 226,
+      "ts": 1766128254458
+    },
+    {
+      "type": "input",
+      "selector": "#stock",
+      "value": "1",
+      "ts": 1766128254689
+    },
+    {
+      "type": "input",
+      "selector": "#stock",
+      "value": "10",
+      "ts": 1766128255098
+    },
+    {
+      "type": "click",
+      "selector": "#buyLimit",
+      "x": 447,
+      "y": 278,
+      "ts": 1766128256242
+    },
+    {
+      "type": "input",
+      "selector": "#buyLimit",
+      "value": "1",
+      "ts": 1766128263939
+    },
+    {
+      "type": "input",
+      "selector": "#buyLimit",
+      "value": "12",
+      "ts": 1766128264026
+    },
+    {
+      "type": "click",
+      "selector": "div.col-md-9",
+      "x": 391,
+      "y": 274,
+      "ts": 1766128265206
+    },
+    {
+      "type": "input",
+      "selector": "#buyMinLimit",
+      "value": "1",
+      "ts": 1766128265335
+    },
+    {
+      "type": "input",
+      "selector": "#buyMinLimit",
+      "value": "12",
+      "ts": 1766128265405
+    },
+    {
+      "type": "click",
+      "selector": "div.form-group",
+      "x": 383,
+      "y": 253,
+      "ts": 1766128269294
+    },
+    {
+      "type": "input",
+      "selector": "#price",
+      "value": "1",
+      "ts": 1766128269378
+    },
+    {
+      "type": "click",
+      "selector": "a.btn.btn-xs.green",
+      "x": 430,
+      "y": 331,
+      "ts": 1766128272123
+    },
+    {
+      "type": "click",
+      "selector": "#radName1212745",
+      "x": 62,
+      "y": 508,
+      "ts": 1766128274456
+    },
+    {
+      "type": "input",
+      "selector": "#radName1212745",
+      "value": "on",
+      "ts": 1766128274456
+    },
+    {
+      "type": "click",
+      "selector": "#btnConfirm",
+      "x": 1267,
+      "y": 1019,
+      "ts": 1766128282227
+    },
+    {
+      "type": "click",
+      "selector": "input",
+      "x": 436,
+      "y": 732,
+      "ts": 1766128286516
+    },
+    {
+      "type": "input",
+      "selector": "input",
+      "value": "C:\\fakepath\\738x410_1_0_80.jpeg",
+      "ts": 1766128294381
+    },
+    {
+      "type": "click",
+      "selector": "span",
+      "x": 1046,
+      "y": 766,
+      "ts": 1766128295442
+    },
+    {
+      "type": "click",
+      "selector": "#detail",
+      "x": 0,
+      "y": 0,
+      "ts": 1766128297143
+    },
+    {
+      "type": "click",
+      "selector": "#readme",
+      "x": 0,
+      "y": 0,
+      "ts": 1766128298868
+    },
+    {
+      "type": "click",
+      "selector": "#btnSave",
+      "x": 570,
+      "y": 1637,
+      "ts": 1766128303902
+    },
+    {
+      "type": "click",
+      "selector": "#buyMinLimit",
+      "x": 533,
+      "y": 502,
+      "ts": 1766128307601
+    },
+    {
+      "type": "input",
+      "selector": "#buyMinLimit",
+      "value": "1",
+      "ts": 1766128308652
+    },
+    {
+      "type": "click",
+      "selector": "#btnSave",
+      "x": 573,
+      "y": 1635,
+      "ts": 1766128311230
+    },
+    {
+      "type": "navigation",
+      "url": "http://tuan.mp-t.mallcoo.cn/tuan/tuanList?mallID=10296&groupID=3",
+      "ts": 1766128313654
+    }
+  ]
+}

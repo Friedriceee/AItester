@@ -1,0 +1,607 @@
+{
+  "version": "1.0",
+  "meta": {
+    "url": "https://mp-t.mallcoo.cn/Mall/MallQAList?mallID=10296&groupID=6",
+    "startedAt": 1766546259372,
+    "finishedAt": 1766546343174
+  },
+  "steps": [
+    {
+      "type": "navigation",
+      "url": "https://mp-t.mallcoo.cn/a/passport/?callbackUrl=%2f%2fmp-t.mallcoo.cn%2fMall%2fMallQAList%3fmallID%3d10296%26groupID%3d6",
+      "ts": 1766546259685
+    },
+    {
+      "type": "navigation",
+      "url": "https://mp-t.mallcoo.cn/a/passport/?callbackUrl=%2f%2fmp-t.mallcoo.cn%2fMall%2fMallQAList%3fmallID%3d10296%26groupID%3d6",
+      "ts": 1766546261740
+    },
+    {
+      "type": "navigation",
+      "url": "https://mp-t.mallcoo.cn/a/passport/login?callbackUrl=%2F%2Fmp-t.mallcoo.cn%2FMall%2FMallQAList%3FmallID%3D10296%26groupID%3D6",
+      "ts": 1766546261740
+    },
+    {
+      "type": "click",
+      "selector": "input.el-input__inner",
+      "x": 762,
+      "y": 270,
+      "ts": 1766546262794
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "c",
+      "ts": 1766546263465
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "c s",
+      "ts": 1766546263546
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs",
+      "ts": 1766546264166
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs——",
+      "ts": 1766546264733
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs——w",
+      "ts": 1766546265336
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs——w q",
+      "ts": 1766546265397
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs——w",
+      "ts": 1766546265763
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs——",
+      "ts": 1766546265870
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs—",
+      "ts": 1766546266089
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs",
+      "ts": 1766546266288
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs_",
+      "ts": 1766546267435
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs_w",
+      "ts": 1766546267710
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs_wq",
+      "ts": 1766546267783
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "cs_wqy",
+      "ts": 1766546267831
+    },
+    {
+      "type": "click",
+      "selector": "input.el-input__inner",
+      "x": 667,
+      "y": 327,
+      "ts": 1766546273640
+    },
+    {
+      "type": "click",
+      "selector": "input.el-input__inner",
+      "x": 689,
+      "y": 328,
+      "ts": 1766546273935
+    },
+    {
+      "type": "input",
+      "selector": "input.el-input__inner",
+      "value": "tBjoEpVWAx8ou_IU312",
+      "ts": 1766546274212
+    },
+    {
+      "type": "click",
+      "selector": "button.el-button.login-button.el-button--primary",
+      "x": 730,
+      "y": 448,
+      "ts": 1766546274601
+    },
+    {
+      "type": "navigation",
+      "url": "https://mp-t.mallcoo.cn/Mall/MallQAList?mallID=10296&groupID=6",
+      "ts": 1766546275248
+    },
+    {
+      "type": "click",
+      "selector": "#btnAddFeedback",
+      "x": 924,
+      "y": 344,
+      "ts": 1766546283046
+    },
+    {
+      "type": "click",
+      "selector": "#CallName",
+      "x": 612,
+      "y": 133,
+      "ts": 1766546284053
+    },
+    {
+      "type": "input",
+      "selector": "#CallName",
+      "value": "w",
+      "ts": 1766546285210
+    },
+    {
+      "type": "input",
+      "selector": "#CallName",
+      "value": "wq",
+      "ts": 1766546285649
+    },
+    {
+      "type": "input",
+      "selector": "#CallName",
+      "value": "wqy",
+      "ts": 1766546285752
+    },
+    {
+      "type": "input",
+      "selector": "#CallName",
+      "value": "wq",
+      "ts": 1766546286217
+    },
+    {
+      "type": "input",
+      "selector": "#CallName",
+      "value": "w",
+      "ts": 1766546286375
+    },
+    {
+      "type": "click",
+      "selector": "#phonNumber",
+      "x": 612,
+      "y": 178,
+      "ts": 1766546287434
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "1",
+      "ts": 1766546288417
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "15",
+      "ts": 1766546288488
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "153",
+      "ts": 1766546288832
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "1536",
+      "ts": 1766546289129
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "15364",
+      "ts": 1766546289327
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "153645",
+      "ts": 1766546289512
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "1536454",
+      "ts": 1766546289688
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "15364542",
+      "ts": 1766546290256
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "153645422",
+      "ts": 1766546290376
+    },
+    {
+      "type": "click",
+      "selector": "#txtContent",
+      "x": 670,
+      "y": 246,
+      "ts": 1766546291191
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "f",
+      "ts": 1766546292195
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa",
+      "ts": 1766546292244
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa p",
+      "ts": 1766546292373
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa pi",
+      "ts": 1766546292465
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa pi a",
+      "ts": 1766546292535
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "fa piao",
+      "ts": 1766546292609
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票",
+      "ts": 1766546293080
+    },
+    {
+      "type": "click",
+      "selector": "#confirm_btn_ok",
+      "x": 860,
+      "y": 434,
+      "ts": 1766546294126
+    },
+    {
+      "type": "click",
+      "selector": "button.close",
+      "x": 894,
+      "y": 51,
+      "ts": 1766546295287
+    },
+    {
+      "type": "click",
+      "selector": "#txtContent",
+      "x": 674,
+      "y": 215,
+      "ts": 1766546295759
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票y",
+      "ts": 1766546296429
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票yo",
+      "ts": 1766546296533
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票you",
+      "ts": 1766546296629
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票you d",
+      "ts": 1766546296779
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票you di",
+      "ts": 1766546296874
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票you dia",
+      "ts": 1766546296958
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票you dian",
+      "ts": 1766546297060
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票you dian m",
+      "ts": 1766546297230
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票you dian mo",
+      "ts": 1766546297401
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票you dian mo h",
+      "ts": 1766546297520
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票you dian mo hu",
+      "ts": 1766546297587
+    },
+    {
+      "type": "input",
+      "selector": "#txtContent",
+      "value": "发票有点模糊",
+      "ts": 1766546298477
+    },
+    {
+      "type": "click",
+      "selector": "#phonNumber",
+      "x": 617,
+      "y": 167,
+      "ts": 1766546299261
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "1536454227",
+      "ts": 1766546299828
+    },
+    {
+      "type": "input",
+      "selector": "#phonNumber",
+      "value": "15364542278",
+      "ts": 1766546299882
+    },
+    {
+      "type": "click",
+      "selector": "#CallName",
+      "x": 611,
+      "y": 130,
+      "ts": 1766546300800
+    },
+    {
+      "type": "input",
+      "selector": "#CallName",
+      "value": "ww",
+      "ts": 1766546300969
+    },
+    {
+      "type": "input",
+      "selector": "#CallName",
+      "value": "ww w",
+      "ts": 1766546301139
+    },
+    {
+      "type": "input",
+      "selector": "#CallName",
+      "value": "www",
+      "ts": 1766546302083
+    },
+    {
+      "type": "click",
+      "selector": "#confirm_btn_ok",
+      "x": 886,
+      "y": 431,
+      "ts": 1766546303420
+    },
+    {
+      "type": "click",
+      "selector": "a.btn.default.btn-xs.purple",
+      "x": 1065,
+      "y": 343,
+      "ts": 1766546307856
+    },
+    {
+      "type": "click",
+      "selector": "#ReContent",
+      "x": 515,
+      "y": 376,
+      "ts": 1766546309231
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "s",
+      "ts": 1766546310664
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "sh",
+      "ts": 1766546310697
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "sha",
+      "ts": 1766546310811
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "shao",
+      "ts": 1766546310883
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "shao h",
+      "ts": 1766546311114
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "shao ho",
+      "ts": 1766546311183
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "shao hou",
+      "ts": 1766546311266
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "shao hou h",
+      "ts": 1766546311552
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "shao hou he",
+      "ts": 1766546311687
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "shao hou hen",
+      "ts": 1766546311787
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "shao hou he ni",
+      "ts": 1766546311883
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "shao hou he nin",
+      "ts": 1766546311996
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "shao hou he nin l",
+      "ts": 1766546312204
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "shao hou he nin li",
+      "ts": 1766546312244
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "shao hou he nin lia",
+      "ts": 1766546312360
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "shao hou he nin lian",
+      "ts": 1766546312418
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "shao hou he nin lia ni",
+      "ts": 1766546312565
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "shao hou he nin lia ni x",
+      "ts": 1766546312579
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "稍后和您俩逆袭",
+      "ts": 1766546312935
+    },
+    {
+      "type": "click",
+      "selector": "input",
+      "x": 364,
+      "y": 522,
+      "ts": 1766546314386
+    },
+    {
+      "type": "input",
+      "selector": "input",
+      "value": "C:\\fakepath\\90x90_1_0_807.png",
+      "ts": 1766546319219
+    },
+    {
+      "type": "input",
+      "selector": "#ReContent",
+      "value": "稍后和您俩逆袭——",
+      "ts": 1766546324391
+    },
+    {
+      "type": "click",
+      "selector": "#btnPost",
+      "x": 1431,
+      "y": 796,
+      "ts": 1766546331619
+    },
+    {
+      "type": "click",
+      "selector": "button.close",
+      "x": 1213,
+      "y": 52,
+      "ts": 1766546333134
+    }
+  ]
+}

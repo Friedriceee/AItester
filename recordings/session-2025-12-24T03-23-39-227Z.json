@@ -1,0 +1,712 @@
+{
+  "version": "1.0",
+  "meta": {
+    "url": "https://m-t.mallcoo.cn/a/tuan/10296/tuan/detail?tid=63500",
+    "startedAt": 1766546491902,
+    "finishedAt": 1766546619227
+  },
+  "steps": [
+    {
+      "type": "navigation",
+      "url": "https://m-t.mallcoo.cn/a/tuan/10296/tuan/detail?tid=63500",
+      "ts": 1766546492311
+    },
+    {
+      "type": "navigation",
+      "url": "https://m-t.mallcoo.cn/v/index/index?url=https%3A%2F%2Fm-t.mallcoo.cn%2Fa%2Ftuan%2F10296%2Ftuan%2Fdetail%3Ftid%3D63500&mid=10296",
+      "ts": 1766546492786
+    },
+    {
+      "type": "navigation",
+      "url": "https://m-t.mallcoo.cn/v/index/index?url=https%3A%2F%2Fm-t.mallcoo.cn%2Fa%2Ftuan%2F10296%2Ftuan%2Fdetail%3Ftid%3D63500&mid=10296",
+      "ts": 1766546493653
+    },
+    {
+      "type": "navigation",
+      "url": "https://m-t.mallcoo.cn/v/index/index?url=https%3A%2F%2Fm-t.mallcoo.cn%2Fa%2Ftuan%2F10296%2Ftuan%2Fdetail%3Ftid%3D63500&mid=10296",
+      "ts": 1766546493653
+    },
+    {
+      "type": "navigation",
+      "url": "https://m-t.mallcoo.cn/v/marketing/tuan/detail?tid=63500&mid=10296",
+      "ts": 1766546493803
+    },
+    {
+      "type": "click",
+      "selector": "uni-view.flm-pay-btn.fr",
+      "x": 307,
+      "y": 806,
+      "ts": 1766546507500
+    },
+    {
+      "type": "navigation",
+      "url": "https://m-t.mallcoo.cn/v/index/identity?redirectUrl=https%253A%252F%252Fm-t.mallcoo.cn%252Fv%252Fmarketing%252Ftuan%252Fdetail%253Ftid%253D63500%2526mid%253D10296&mid=10296",
+      "ts": 1766546507528
+    },
+    {
+      "type": "click",
+      "selector": "input.uni-input-input",
+      "x": 157,
+      "y": 116,
+      "ts": 1766546509456
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "1",
+      "ts": 1766546511756
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "15",
+      "ts": 1766546511932
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "153",
+      "ts": 1766546512992
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "1539",
+      "ts": 1766546513490
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "15395",
+      "ts": 1766546513673
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "153954",
+      "ts": 1766546513865
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "1539546",
+      "ts": 1766546514030
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "15395465",
+      "ts": 1766546514245
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "153954655",
+      "ts": 1766546514413
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "1539546555",
+      "ts": 1766546514584
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "15395465555",
+      "ts": 1766546514751
+    },
+    {
+      "type": "click",
+      "selector": "uni-view.getcode",
+      "x": 306,
+      "y": 177,
+      "ts": 1766546516048
+    },
+    {
+      "type": "click",
+      "selector": "uni-page-body",
+      "x": 148,
+      "y": 377,
+      "ts": 1766546539957
+    },
+    {
+      "type": "click",
+      "selector": "input.uni-input-input",
+      "x": 92,
+      "y": 178,
+      "ts": 1766546540465
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "5",
+      "ts": 1766546541337
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "55",
+      "ts": 1766546541486
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "557",
+      "ts": 1766546541662
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "5577",
+      "ts": 1766546541790
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "55777",
+      "ts": 1766546541917
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "55777",
+      "ts": 1766546543534
+    },
+    {
+      "type": "click",
+      "selector": "uni-view.s_btn_lg.marb10",
+      "x": 195,
+      "y": 331,
+      "ts": 1766546544577
+    },
+    {
+      "type": "click",
+      "selector": "uni-view.mc-protocol-checkbox",
+      "x": 280,
+      "y": 361,
+      "ts": 1766546546272
+    },
+    {
+      "type": "click",
+      "selector": "uni-view.globalpro-modal-footer--btn",
+      "x": 211,
+      "y": 544,
+      "ts": 1766546547151
+    },
+    {
+      "type": "click",
+      "selector": "uni-view.getcode",
+      "x": 294,
+      "y": 165,
+      "ts": 1766546548962
+    },
+    {
+      "type": "click",
+      "selector": "input.uni-input-input",
+      "x": 152,
+      "y": 163,
+      "ts": 1766546550096
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "55777",
+      "ts": 1766546550951
+    },
+    {
+      "type": "click",
+      "selector": "input.uni-input-input",
+      "x": 79,
+      "y": 173,
+      "ts": 1766546565932
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "557",
+      "ts": 1766546567302
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "55",
+      "ts": 1766546567435
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "5",
+      "ts": 1766546567548
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "",
+      "ts": 1766546567668
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "6",
+      "ts": 1766546568360
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "60",
+      "ts": 1766546568484
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "606",
+      "ts": 1766546568579
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "6065",
+      "ts": 1766546568751
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "60656",
+      "ts": 1766546568758
+    },
+    {
+      "type": "click",
+      "selector": "uni-view.s_btn_lg.marb10",
+      "x": 154,
+      "y": 337,
+      "ts": 1766546570463
+    },
+    {
+      "type": "navigation",
+      "url": "https://m-t.mallcoo.cn/v/user/obc/index?redirectUrl=https%253A%252F%252Fm-t.mallcoo.cn%252Fv%252Fmarketing%252Ftuan%252Fdetail%253Ftid%253D63500%2526mid%253D10296&skipSuccessPage=false&mid=10296",
+      "ts": 1766546571150
+    },
+    {
+      "type": "navigation",
+      "url": "https://m-t.mallcoo.cn/v/user/obc/password?redirectUrl=https%253A%252F%252Fm-t.mallcoo.cn%252Fv%252Fmarketing%252Ftuan%252Fdetail%253Ftid%253D63500%2526mid%253D10296&refID=&skipSuccessPage=false&mid=10296",
+      "ts": 1766546571564
+    },
+    {
+      "type": "click",
+      "selector": "input.uni-input-input",
+      "x": 135,
+      "y": 84,
+      "ts": 1766546573103
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "1",
+      "ts": 1766546574759
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "12",
+      "ts": 1766546574846
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "123",
+      "ts": 1766546574955
+    },
+    {
+      "type": "click",
+      "selector": "uni-button.button-hover.btn2.false",
+      "x": 106,
+      "y": 817,
+      "ts": 1766546575663
+    },
+    {
+      "type": "click",
+      "selector": "input.uni-input-input",
+      "x": 116,
+      "y": 72,
+      "ts": 1766546576866
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "1234",
+      "ts": 1766546577109
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "12345",
+      "ts": 1766546577386
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "123455",
+      "ts": 1766546577653
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "1234555",
+      "ts": 1766546577947
+    },
+    {
+      "type": "click",
+      "selector": "uni-button.button-hover.btn2.false",
+      "x": 129,
+      "y": 832,
+      "ts": 1766546578602
+    },
+    {
+      "type": "click",
+      "selector": "input.uni-input-input",
+      "x": 166,
+      "y": 73,
+      "ts": 1766546579827
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "1234555W",
+      "ts": 1766546580333
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "1234555WW",
+      "ts": 1766546580692
+    },
+    {
+      "type": "input",
+      "selector": "input.uni-input-input",
+      "value": "1234555WWW",
+      "ts": 1766546580852
+    },
+    {
+      "type": "click",
+      "selector": "uni-button.button-hover.btn2.false",
+      "x": 163,
+      "y": 811,
+      "ts": 1766546581552
+    },
+    {
+      "type": "navigation",
+      "url": "https://m-t.mallcoo.cn/v/user/obc/success?redirectUrl=https%253A%252F%252Fm-t.mallcoo.cn%252Fv%252Fmarketing%252Ftuan%252Fdetail%253Ftid%253D63500%2526mid%253D10296&mid=10296",
+      "ts": 1766546582508
+    },
+    {
+      "type": "click",
+      "selector": "uni-page-body",
+      "x": 162,
+      "y": 821,
+      "ts": 1766546582649
+    },
+    {
+      "type": "click",
+      "selector": "uni-button.mc-result-btn--default.button-hover",
+      "x": 144,
+      "y": 290,
+      "ts": 1766546583830
+    },
+    {
+      "type": "navigation",
+      "url": "https://m-t.mallcoo.cn/v/home/user/index?mid=10296",
+      "ts": 1766546583847
+    },
+    {
+      "type": "click",
+      "selector": "span",
+      "x": 162,
+      "y": 646,
+      "ts": 1766546586707
+    },
+    {
+      "type": "navigation",
+      "url": "https://m-t.mallcoo.cn/v/home/Feedback/List?mid=10296",
+      "ts": 1766546586736
+    },
+    {
+      "type": "click",
+      "selector": "textarea.uni-textarea-textarea",
+      "x": 115,
+      "y": 812,
+      "ts": 1766546588593
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "y",
+      "ts": 1766546590547
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "yo",
+      "ts": 1766546590661
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you",
+      "ts": 1766546590720
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "yo",
+      "ts": 1766546591240
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "y",
+      "ts": 1766546591348
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "",
+      "ts": 1766546591521
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "y",
+      "ts": 1766546592527
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "yo",
+      "ts": 1766546592590
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you",
+      "ts": 1766546592690
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you d",
+      "ts": 1766546593197
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you di",
+      "ts": 1766546593268
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you dia",
+      "ts": 1766546593381
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you dian",
+      "ts": 1766546593450
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you dian b",
+      "ts": 1766546593652
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you dian bu",
+      "ts": 1766546593708
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you dian bu h",
+      "ts": 1766546593844
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you dian bu he",
+      "ts": 1766546593938
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you dian bu he l",
+      "ts": 1766546594015
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you dian bu he li",
+      "ts": 1766546594069
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "有点不合理",
+      "ts": 1766546594487
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "有点不合理",
+      "ts": 1766546594487
+    },
+    {
+      "type": "click",
+      "selector": "uni-view.sub-up",
+      "x": 344,
+      "y": 806,
+      "ts": 1766546595823
+    },
+    {
+      "type": "click",
+      "selector": "uni-view.uiconfont.uicon-camera.font18",
+      "x": 15,
+      "y": 823,
+      "ts": 1766546599903
+    },
+    {
+      "type": "click",
+      "selector": "uni-view.upimg",
+      "x": 85,
+      "y": 757,
+      "ts": 1766546600725
+    },
+    {
+      "type": "click",
+      "selector": "input",
+      "x": 0,
+      "y": 0,
+      "ts": 1766546600726
+    },
+    {
+      "type": "input",
+      "selector": "input",
+      "value": "C:\\fakepath\\90x90_1_0_805.png",
+      "ts": 1766546606781
+    },
+    {
+      "type": "click",
+      "selector": "textarea.uni-textarea-textarea",
+      "x": 231,
+      "y": 720,
+      "ts": 1766546608624
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "y",
+      "ts": 1766546609956
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "yo",
+      "ts": 1766546610024
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you",
+      "ts": 1766546610109
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you d",
+      "ts": 1766546610256
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you di",
+      "ts": 1766546610308
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you dia",
+      "ts": 1766546610398
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you dian",
+      "ts": 1766546610508
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you dian b",
+      "ts": 1766546610831
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you dian bu",
+      "ts": 1766546610948
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you dian bu h",
+      "ts": 1766546611195
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you dian bu he",
+      "ts": 1766546611344
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you dian bu he l",
+      "ts": 1766546611409
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "you dian bu he li",
+      "ts": 1766546611459
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "有点不合理",
+      "ts": 1766546611721
+    },
+    {
+      "type": "input",
+      "selector": "textarea.uni-textarea-textarea",
+      "value": "有点不合理",
+      "ts": 1766546611721
+    },
+    {
+      "type": "click",
+      "selector": "#moveBtnWidgetEle",
+      "x": 341,
+      "y": 707,
+      "ts": 1766546613516
+    },
+    {
+      "type": "click",
+      "selector": "uni-view.sub-up",
+      "x": 341,
+      "y": 712,
+      "ts": 1766546614580
+    }
+  ]
+}

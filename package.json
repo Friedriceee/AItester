@@ -1,0 +1,73 @@
+{
+  "name": "playwright-ai-test-recorder",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/electron/electron/main.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.electron.json && node scripts/copy-renderer.mjs && echo '{ \"type\": \"commonjs\" }' > dist/electron/package.json",
+    "dev": "ts-node src/cli.ts",
+    "electron:dev": "npm run build && electron .",
+    "record": "ts-node src/cli.ts record",
+    "generate": "ts-node src/cli.ts generate",
+    "replay": "ts-node src/cli.ts replay",
+    "pack": "npm run build && electron-builder --dir",
+    "dist:mac": "npm run build && electron-builder --mac dmg",
+    "dist:win": "npm run build && electron-builder --win nsis",
+    "dist:all": "npm run build && electron-builder -m -w"
+  },
+  "bin": {
+    "ai-tester": "dist/cli.js"
+  },
+  "build": {
+    "appId": "com.example.ai-tester",
+    "productName": "AI Tester",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**",
+      "package.json"
+    ],
+    "asar": true,
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "category": "public.app-category.developer-tools"
+    },
+    "dmg": {
+      "contents": [
+        { "x": 130, "y": 220, "type": "file" },
+        { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "artifactName": "${productName}-Setup-${version}.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "dependencies": {
+    "@playwright/test": "^1.48.0",
+    "axios": "^1.13.2",
+    "chokidar": "^3.6.0",
+    "commander": "^12.0.0",
+    "playwright": "^1.48.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "electron": "^39.2.7",
+    "electron-builder": "^26.0.12",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.0"
+  }
+}
