@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "main": "dist/electron/electron/main.js",
+  "main": "dist/electron/electron/main.cjs",
   "scripts": {
-    "build": "tsc -p tsconfig.json && tsc -p tsconfig.electron.json && node scripts/copy-renderer.mjs && echo '{ \"type\": \"commonjs\" }' > dist/electron/package.json",
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.electron.json && node scripts/copy-renderer.mjs && node -e \"const fs=require('fs');fs.copyFileSync('dist/electron/electron/main.js','dist/electron/electron/main.cjs');fs.writeFileSync('dist/electron/package.json','{\\\"type\\\":\\\"commonjs\\\"}');\"",
     "dev": "ts-node src/cli.ts",
     "electron:dev": "npm run build && electron .",
     "record": "ts-node src/cli.ts record",
@@ -22,9 +22,6 @@
   "build": {
     "appId": "com.example.ai-tester",
     "productName": "AI Tester",
-    "extraMetadata": {
-      "type": "commonjs"
-    },
     "directories": {
       "output": "release"
     },
