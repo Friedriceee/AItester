@@ -22,6 +22,9 @@
   "build": {
     "appId": "com.example.ai-tester",
     "productName": "AI Tester",
+    "extraMetadata": {
+      "type": "commonjs"
+    },
     "directories": {
       "output": "release"
     },
