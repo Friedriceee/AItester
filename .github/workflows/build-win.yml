@@ -1,6 +1,18 @@
 name: build-win-x64
 
 on:
+  # 推送代码即自动构建（main 分支），仍保留手动触发
+  push:
+    branches: [master]
+    paths:
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig.json'
+      - 'src/**'
+      - 'electron/**'
+      - 'renderer/**'
+      - 'scripts/**'
+      - '.github/workflows/build-win.yml'
   workflow_dispatch:
 
 jobs:
