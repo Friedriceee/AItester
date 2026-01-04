@@ -1,0 +1,54 @@
+name: build-mac-universal
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig.json'
+      - 'tsconfig.electron.json'
+      - 'src/**'
+      - 'renderer/**'
+      - 'scripts/**'
+      - '.github/workflows/build-mac.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    env:
+      # Developer ID 签名证书（p12 Base64），以及证书密码
+      CSC_LINK: ${{ secrets.CSC_LINK }}
+      CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+      # Apple ID 公证凭据（Apple ID + App 专用密码）
+      APPLE_ID: ${{ secrets.APPLE_ID }}
+      APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+      APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+      # 若需指定 identity，可在 package.json 中配置或设置下行环境变量（可选）
+      # CSC_NAME: Developer ID Application: Your Name (TEAMID)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # 如需重新下载 Playwright 浏览器，可打开此步；目前已随仓库带入 playwright-browsers
+      # - name: Install Playwright Chromium
+      #   run: npx playwright install chromium
+
+      - name: Build mac DMG (signed & notarized)
+        run: npm run dist:mac -- --arm64 --publish=never
+
+      - name: Upload DMG artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-tester-mac-dmg
+          path: release/AI Tester-*-arm64.dmg

@@ -35,9 +35,38 @@ function createWindow() {
     },
   });
 
-  // dist/electron/electron/main.js -> ../../renderer/index.html
-  // Because 'scripts/copy-renderer.mjs' copies renderer to dist/renderer
-  mainWindow.loadFile(path.join(__dirname, '../../renderer/index.html'));
+  // 智能路径判断：根据运行环境选择正确的renderer路径
+  const getRendererPath = (): string => {
+    if (app.isPackaged) {
+      // 打包环境：使用 resources/dist/renderer
+      const packagedPath = path.join(process.resourcesPath, 'dist', 'renderer', 'index.html');
+      if (require('fs').existsSync(packagedPath)) {
+        return packagedPath;
+      }
+      console.warn('Packaged renderer not found, falling back to development path');
+    }
+    
+    // 开发环境：使用相对路径查找 renderer/index.html
+    const devPaths = [
+      path.join(__dirname, '../../renderer/index.html'),  // 标准路径
+      path.join(__dirname, '../renderer/index.html'),     // 备用路径
+      path.resolve(__dirname, '../../renderer/index.html'), // 绝对路径解析
+    ];
+    
+    for (const devPath of devPaths) {
+      if (require('fs').existsSync(devPath)) {
+        console.log(`Loading renderer from: ${devPath}`);
+        return devPath;
+      }
+    }
+    
+    // 如果都找不到，返回默认路径并记录错误
+    console.error('Renderer index.html not found in any expected location');
+    return devPaths[0]; // 返回第一个路径作为默认
+  };
+  
+  const rendererPath = getRendererPath();
+  mainWindow.loadFile(rendererPath);
 }
 
 app.whenReady().then(() => {

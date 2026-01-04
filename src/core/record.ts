@@ -15,7 +15,42 @@ export interface RecordSession {
 }
 
 export async function startRecording(options: RecordOptions): Promise<RecordSession> {
-  const browser: Browser = await chromium.launch({ headless: options.headless ?? false });
+  // 优先使用随包内置的浏览器；找不到则回退 Playwright 默认
+  const resolveBundledChromium = (): string | null => {
+    try {
+      const base = (() => {
+        // Electron 打包后资源路径
+        if (process.versions?.electron && process.resourcesPath) {
+          return path.join(process.resourcesPath, 'playwright-browsers', 'chromium-1200');
+        }
+        // 开发/本地调试：项目根目录下复制的浏览器
+        return path.join(process.cwd(), 'playwright-browsers', 'chromium-1200');
+      })();
+
+      const macArmPath = path.join(
+        base,
+        'chrome-mac-arm64',
+        'Google Chrome for Testing.app',
+        'Contents',
+        'MacOS',
+        'Google Chrome for Testing'
+      );
+
+      if (require('fs').existsSync(macArmPath)) {
+        return macArmPath;
+      }
+    } catch {
+      // ignore
+    }
+    return null;
+  };
+
+  const executablePath = resolveBundledChromium();
+
+  const browser: Browser = await chromium.launch({
+    headless: options.headless ?? false,
+    executablePath: executablePath ?? undefined,
+  });
   const page: Page = await browser.newPage();
 
   const startedAt = Date.now();

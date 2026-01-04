@@ -29,6 +29,12 @@
       "dist/**",
       "package.json"
     ],
+    "extraResources": [
+      {
+        "from": "playwright-browsers/chromium-1200",
+        "to": "playwright-browsers/chromium-1200"
+      }
+    ],
     "asar": true,
     "mac": {
       "target": [
