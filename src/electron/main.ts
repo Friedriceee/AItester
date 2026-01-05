@@ -3,6 +3,14 @@ import path from 'node:path';
 import { startRecording, RecordSession } from '../core/record.js';
 import { generateFromIR } from '../core/generate.js';
 
+const ensurePackagedPlaywrightPath = () => {
+  if (app.isPackaged) {
+    const bundledPath = path.join(process.resourcesPath, 'playwright-browsers');
+    process.env.PLAYWRIGHT_BROWSERS_PATH = bundledPath;
+    console.log(`PLAYWRIGHT_BROWSERS_PATH set to packaged path: ${bundledPath}`);
+  }
+};
+
 let mainWindow: BrowserWindow | null = null;
 let currentSession: RecordSession | null = null;
 
@@ -76,6 +84,9 @@ function createWindow() {
   const rendererPath = getRendererPath();
   mainWindow.loadFile(rendererPath);
 }
+
+// 在应用就绪前设置打包环境的浏览器路径
+ensurePackagedPlaywrightPath();
 
 app.whenReady().then(() => {
   createWindow();
