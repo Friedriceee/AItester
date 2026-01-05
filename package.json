@@ -44,7 +44,7 @@
     },
     "dmg": {
       "contents": [
-        { "x": 130, "y": 220, "type": "file" },
+        { "x": 130, "y": 220, "type": "file", "path": "AI Tester.app" },
         { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
       ]
     },
