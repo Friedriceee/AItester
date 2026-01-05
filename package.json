@@ -12,7 +12,7 @@
     "generate": "ts-node src/cli.ts generate",
     "replay": "ts-node src/cli.ts replay",
     "pack": "npm run build && electron-builder --dir",
-    "dist:mac": "npm run build && electron-builder --mac dmg",
+    "dist:mac": "npm run build && electron-builder --mac zip",
     "dist:win": "npm run build && electron-builder --win nsis",
     "dist:all": "npm run build && electron-builder -m -w"
   },
@@ -38,7 +38,7 @@
     "asar": true,
     "mac": {
       "target": [
-        "dmg"
+        "zip"
       ],
       "category": "public.app-category.developer-tools"
     },

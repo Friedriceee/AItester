@@ -50,11 +50,12 @@ jobs:
       # - name: Install Playwright Chromium
       #   run: npx playwright install chromium
 
-      - name: Build mac DMG (signed & notarized)
+      - name: Build mac zip (signed & notarized)
         run: npm run dist:mac -- --arm64 --publish=never
 
-      - name: Upload DMG artifact
+      - name: Upload mac artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ai-tester-mac-dmg
-          path: release/AI Tester-*-arm64.dmg
+          name: ai-tester-mac-arm64
+          path: |
+            release/**/*.zip
