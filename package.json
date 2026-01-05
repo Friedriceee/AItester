@@ -31,8 +31,8 @@
     ],
     "extraResources": [
       {
-        "from": "playwright-browsers/chromium-1200",
-        "to": "playwright-browsers/chromium-1200"
+        "from": "playwright-browsers",
+        "to": "playwright-browsers"
       }
     ],
     "asar": true,
