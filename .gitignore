@@ -4,3 +4,5 @@ dist/
 out/
 *.dmg
 *.exe
+generated/
+aigenerate/

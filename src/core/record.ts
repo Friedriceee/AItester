@@ -51,12 +51,120 @@ export async function startRecording(options: RecordOptions): Promise<RecordSess
     headless: options.headless ?? false,
     executablePath: executablePath ?? undefined,
   });
-  const page: Page = await browser.newPage();
+  const context = await browser.newContext();
 
   const startedAt = Date.now();
   const events: AIEvent[] = [];
   let finished = false;
   let finalPath = '';
+  let activePages = 0;
+
+  // 统一的事件桥接：多个 page 共用同一收集逻辑
+  const attachPage = async (page: Page) => {
+    // Collect navigation events
+    page.on('framenavigated', (frame) => {
+      if (frame === page.mainFrame()) {
+        events.push({
+          type: 'navigation',
+          url: page.url(),
+          ts: Date.now(),
+        } as NavEvent);
+      }
+    });
+
+    // Bridge from page -> node for DOM events
+    await page.exposeFunction('aiRecordEvent', (payload: any) => {
+      const now = Date.now();
+      if (payload && payload.type === 'click') {
+        const ev: ClickEvent = {
+          type: 'click',
+          selector: payload.selector ?? '',
+          x: payload.x,
+          y: payload.y,
+          ts: now,
+        };
+        events.push(ev);
+      } else if (payload && payload.type === 'input') {
+        const ev: InputEvent = {
+          type: 'input',
+          selector: payload.selector ?? '',
+          value: payload.value ?? '',
+          ts: now,
+        };
+        events.push(ev);
+      }
+    });
+
+    // Inject recorder for click/input
+    await page.addInitScript(() => {
+      // Build a simple selector for an element
+      function buildSelector(el: Element | null): string {
+        if (!el) return '';
+        const id = (el as HTMLElement).id;
+        if (id) {
+          try {
+            return `#${CSS.escape(id)}`;
+          } catch {
+            return `#${id}`;
+          }
+        }
+        const tag = el.tagName.toLowerCase();
+        const classes = (el as HTMLElement).classList ? Array.from((el as HTMLElement).classList) : [];
+        const safeClasses = classes.map(c => {
+          try {
+            return CSS.escape(c);
+          } catch {
+            return c;
+          }
+        });
+        let sel = tag;
+        if (safeClasses.length) {
+          sel += '.' + safeClasses.join('.');
+        }
+        return sel;
+      }
+
+      document.addEventListener('click', (e) => {
+        try {
+          const t = e.target as HTMLElement | null;
+          const selector = buildSelector(t);
+          (window as any).aiRecordEvent({
+            type: 'click',
+            selector,
+            x: (e as MouseEvent).clientX,
+            y: (e as MouseEvent).clientY,
+          });
+        } catch {
+          // swallow
+        }
+      }, true);
+
+      document.addEventListener('input', (e) => {
+        try {
+          const t = e.target as HTMLInputElement | HTMLTextAreaElement | null;
+          const selector = buildSelector(t);
+          const value = t && 'value' in (t as any) ? ((t as any).value ?? '') : '';
+          (window as any).aiRecordEvent({
+            type: 'input',
+            selector,
+            value,
+          });
+        } catch {
+          // swallow
+        }
+      }, true);
+    });
+
+    // 记录活跃页面数，全部关闭后再结束
+    activePages += 1;
+    page.once('close', async () => {
+      activePages -= 1;
+      if (activePages <= 0) {
+        console.log('[AI Tester] All pages closed, finalizing...');
+        await finalize();
+      }
+    });
+  };
 
   const finalize = async (): Promise<string> => {
     if (finished) return finalPath;
@@ -92,114 +200,19 @@ export async function startRecording(options: RecordOptions): Promise<RecordSess
     return finalPath;
   };
 
-  // Collect navigation events
-  page.on('framenavigated', (frame) => {
-    if (frame === page.mainFrame()) {
-      events.push({
-        type: 'navigation',
-        url: page.url(),
-        ts: Date.now(),
-      } as NavEvent);
-    }
+  // 新页面监听：用户手动打开新 Tab 也能被录制（上下文监听，更符合 Playwright 类型）
+  context.on('page', async (p: Page) => {
+    await attachPage(p);
   });
 
-  // Bridge from page -> node for DOM events
-  await page.exposeFunction('aiRecordEvent', (payload: any) => {
-    const now = Date.now();
-    if (payload && payload.type === 'click') {
-      const ev: ClickEvent = {
-        type: 'click',
-        selector: payload.selector ?? '',
-        x: payload.x,
-        y: payload.y,
-        ts: now,
-      };
-      events.push(ev);
-    } else if (payload && payload.type === 'input') {
-      const ev: InputEvent = {
-        type: 'input',
-        selector: payload.selector ?? '',
-        value: payload.value ?? '',
-        ts: now,
-      };
-      events.push(ev);
-    }
-  });
-
-  // Inject recorder for click/input
-  await page.addInitScript(() => {
-    // Build a simple selector for an element
-    function buildSelector(el: Element | null): string {
-      if (!el) return '';
-      const id = (el as HTMLElement).id;
-      if (id) {
-        try {
-          return `#${CSS.escape(id)}`;
-        } catch {
-          return `#${id}`;
-        }
-      }
-      const tag = el.tagName.toLowerCase();
-      const classes = (el as HTMLElement).classList ? Array.from((el as HTMLElement).classList) : [];
-      const safeClasses = classes.map(c => {
-        try {
-          return CSS.escape(c);
-        } catch {
-          return c;
-        }
-      });
-      let sel = tag;
-      if (safeClasses.length) {
-        sel += '.' + safeClasses.join('.');
-      }
-      return sel;
-    }
-
-    document.addEventListener('click', (e) => {
-      try {
-        const t = e.target as HTMLElement | null;
-        const selector = buildSelector(t);
-        (window as any).aiRecordEvent({
-          type: 'click',
-          selector,
-          x: (e as MouseEvent).clientX,
-          y: (e as MouseEvent).clientY,
-        });
-      } catch (err) {
-        // swallow
-      }
-    }, true);
-
-    document.addEventListener('input', (e) => {
-      try {
-        const t = e.target as HTMLInputElement | HTMLTextAreaElement | null;
-        const selector = buildSelector(t);
-        const value = t && 'value' in (t as any) ? ((t as any).value ?? '') : '';
-        (window as any).aiRecordEvent({
-          type: 'input',
-          selector,
-          value,
-        });
-      } catch (err) {
-        // swallow
-      }
-    }, true);
-  });
+  // 创建首个页面并附加监听
+  const page: Page = await context.newPage();
+  await attachPage(page);
 
   await page.goto(options.url);
 
   console.log('[AI Tester] Recording started.');
   console.log('[AI Tester] Press Ctrl+C to stop, or close the browser window.');
-
-  // If user closes the page, finalize too
-  page.once('close', async () => {
-    console.log('[AI Tester] Page closed, finalizing...');
-    // We can't return the path here easily as this is an event handler,
-    // but finalize() will save the file.
-    // The consumer should handle the process exit if needed by waiting on stop() or handling SIGINT themselves.
-    // In this core module, we just ensure data is saved.
-    await finalize();
-  });
 
   return {
     stop: finalize
