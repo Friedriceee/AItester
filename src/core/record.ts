@@ -1,5 +1,6 @@
 import { chromium } from 'playwright';
 import type { Browser, Page } from 'playwright';
+import fs from 'node:fs';
 import path from 'node:path';
 import { AIEvent, AIR, ClickEvent, InputEvent, NavEvent } from './types.js';
 import { saveIR } from './utils.js';
@@ -15,41 +16,10 @@ export interface RecordSession {
 }
 
 export async function startRecording(options: RecordOptions): Promise<RecordSession> {
-  // 优先使用随包内置的浏览器；找不到则回退 Playwright 默认
-  const resolveBundledChromium = (): string | null => {
-    try {
-      const base = (() => {
-        // Electron 打包后资源路径
-        if (process.versions?.electron && process.resourcesPath) {
-          return path.join(process.resourcesPath, 'playwright-browsers', 'chromium-1200');
-        }
-        // 开发/本地调试：项目根目录下复制的浏览器
-        return path.join(process.cwd(), 'playwright-browsers', 'chromium-1200');
-      })();
-
-      const macArmPath = path.join(
-        base,
-        'chrome-mac-arm64',
-        'Google Chrome for Testing.app',
-        'Contents',
-        'MacOS',
-        'Google Chrome for Testing'
-      );
-
-      if (require('fs').existsSync(macArmPath)) {
-        return macArmPath;
-      }
-    } catch {
-      // ignore
-    }
-    return null;
-  };
-
-  const executablePath = resolveBundledChromium();
-
+  // Playwright 会依据 PLAYWRIGHT_BROWSERS_PATH 自动解析内置浏览器
+  // 运行时不再硬编码 executablePath，避免版本/目录变动导致失败
   const browser: Browser = await chromium.launch({
     headless: options.headless ?? false,
-    executablePath: executablePath ?? undefined,
   });
   const context = await browser.newContext();
 
