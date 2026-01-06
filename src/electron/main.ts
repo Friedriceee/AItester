@@ -3,12 +3,31 @@ import path from 'node:path';
 import { startRecording, RecordSession } from '../core/record.js';
 import { generateFromIR } from '../core/generate.js';
 
-const ensurePackagedPlaywrightPath = () => {
-  if (app.isPackaged) {
-    const bundledPath = path.join(process.resourcesPath, 'playwright-browsers');
-    process.env.PLAYWRIGHT_BROWSERS_PATH = bundledPath;
-    console.log(`PLAYWRIGHT_BROWSERS_PATH set to packaged path: ${bundledPath}`);
+const ensurePlaywrightPath = () => {
+  const fs = require('fs');
+
+  // 优先选择真实存在的目录，保证相对路径在打包/开发环境均可用
+  const candidatePaths = app.isPackaged
+    ? [
+        path.join(process.resourcesPath, 'playwright-browsers'),               // 打包后 resources 相对路径
+        path.join(app.getAppPath(), 'playwright-browsers'),                    // app 根目录（asar 外 unpacked）
+      ]
+    : [
+        path.join(process.cwd(), 'playwright-browsers'),                       // 开发：工作目录
+        path.join(app.getAppPath(), 'playwright-browsers'),                    // 开发：应用根目录
+      ];
+
+  for (const p of candidatePaths) {
+    if (fs.existsSync(p)) {
+      process.env.PLAYWRIGHT_BROWSERS_PATH = p;
+      console.log(`PLAYWRIGHT_BROWSERS_PATH set to: ${p}`);
+      return;
+    }
   }
+
+  // 如果都不存在，仍设置为首选路径便于日志诊断
+  process.env.PLAYWRIGHT_BROWSERS_PATH = candidatePaths[0];
+  console.warn(`PLAYWRIGHT_BROWSERS_PATH set but path not found: ${candidatePaths[0]}`);
 };
 
 let mainWindow: BrowserWindow | null = null;
@@ -83,10 +102,10 @@ function createWindow() {
   
   const rendererPath = getRendererPath();
   mainWindow.loadFile(rendererPath);
-}
-
-// 在应用就绪前设置打包环境的浏览器路径
-ensurePackagedPlaywrightPath();
+  }
+  
+  // 在应用就绪前设置 Playwright 浏览器路径（打包/开发均设置）
+  ensurePlaywrightPath();
 
 app.whenReady().then(() => {
   createWindow();
