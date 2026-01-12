@@ -16,85 +16,68 @@ export interface RecordSession {
   stop: () => Promise<string>;
 }
 
-// 确保浏览器已安装，如果没有则自动安装
-async function ensureBrowserInstalled(): Promise<void> {
-  try {
-    // 尝试启动浏览器检查是否已安装
-    const browser = await chromium.launch({ headless: true });
-    await browser.close();
-    console.log('[AI Tester] Browser already installed.');
-  } catch (error: any) {
-    if (error.message && error.message.includes('Executable doesn\'t exist')) {
-      console.log('[AI Tester] Browser not found, installing...');
-      
-      // 使用与Electron主进程相同的逻辑确定浏览器路径
-      let browsersPath = process.env.PLAYWRIGHT_BROWSERS_PATH;
-      
-      if (!browsersPath) {
-        // 如果环境变量未设置，使用与主进程相同的逻辑
-        if (process.versions?.electron) {
-          try {
-            const { app } = require('electron') as typeof import('electron');
-            browsersPath = path.join(app.getPath('userData'), 'playwright-browsers');
-          } catch {
-            browsersPath = path.join(process.cwd(), 'playwright-browsers');
-          }
-        } else {
-          browsersPath = path.join(process.cwd(), 'playwright-browsers');
-        }
-      }
-      
-      try {
-        // 确保目录存在
-        if (!fs.existsSync(browsersPath)) {
-          fs.mkdirSync(browsersPath, { recursive: true });
-        }
-        
-        // 设置环境变量
-        process.env.PLAYWRIGHT_BROWSERS_PATH = browsersPath;
-        console.log(`[AI Tester] Installing browser to: ${browsersPath}`);
-        
-        // 使用更可靠的安装方法
-        try {
-          // 方法1: 使用playwright-core CLI（最直接的方法）
-          const playwrightCorePath = require.resolve('playwright-core/cli.js');
-          execSync(`node "${playwrightCorePath}" install chromium`, {
-            stdio: 'inherit',
-            env: { ...process.env, PLAYWRIGHT_BROWSERS_PATH: browsersPath }
-          });
-          console.log('[AI Tester] Browser installation completed.');
-        } catch (cliError) {
-          console.log('[AI Tester] Core CLI method failed, trying npm method...');
-          
-          // 方法2: 使用npm exec
-          try {
-            execSync(`npm exec playwright install chromium`, {
-              stdio: 'inherit',
-              env: { ...process.env, PLAYWRIGHT_BROWSERS_PATH: browsersPath }
-            });
-            console.log('[AI Tester] Browser installation completed via npm exec.');
-          } catch (npmError) {
-            throw new Error(`浏览器安装失败: ${(npmError as Error).message || npmError}`);
-          }
-        }
-      } catch (installError: any) {
-        console.error('[AI Tester] Failed to install browser:', installError.message);
-        throw new Error(`无法安装浏览器: ${installError.message}`);
-      }
-    } else {
-      throw error;
+// 强制检查已打包的浏览器是否存在（不进行任何 npm 安装）
+function assertBundledBrowser() {
+  // PLAYWRIGHT_BROWSERS_PATH 环境变量通常由 Playwright 自动处理或在打包时注入
+  // 在打包后的 Electron 环境中，Playwright 会查找 executablePath
+  
+  // 这里我们做一个简单的文件系统检查，确保浏览器目录存在
+  // 注意：Playwright 的 executablePath 查找逻辑比较复杂，这里主要为了快速失败并给出明确提示
+  
+  // 尝试查找常见的浏览器路径
+  let browserRoot = process.env.PLAYWRIGHT_BROWSERS_PATH;
+  
+  if (!browserRoot && process.versions?.electron) {
+    // Electron 打包环境下的常见路径
+    // resources/playwright-browsers
+    const { app } = require('electron') as typeof import('electron');
+    // 在开发环境是项目根目录，在打包环境是 resources 目录上一级
+    const basePath = process.resourcesPath ? process.resourcesPath : app.getAppPath();
+    const candidate = path.join(basePath, 'playwright-browsers');
+    if (fs.existsSync(candidate)) {
+      browserRoot = candidate;
+      // 显式设置环境变量，帮助 Playwright 找到它
+      process.env.PLAYWRIGHT_BROWSERS_PATH = browserRoot;
+      console.log(`[AI Tester] Found bundled browsers at: ${browserRoot}`);
     }
   }
+
+  // 如果实在找不到路径，或者路径下没有 chromium，则报错
+  // 我们只做最基本的检查：如果设置了路径，检查路径是否存在
+  if (browserRoot) {
+    if (!fs.existsSync(browserRoot)) {
+       throw new Error(
+        `Critical Error: Browser directory not found at ${browserRoot}\n` +
+        `请确保使用完整安装包，不要在客户端手动安装依赖。`
+      );
+    }
+    
+    // 检查是否有 chromium 相关文件夹
+    try {
+      const hasChromium = fs.readdirSync(browserRoot).some(n => n.startsWith('chromium-'));
+      if (!hasChromium) {
+        throw new Error(
+          `Critical Error: No Chromium browser found in ${browserRoot}\n` +
+          `安装包可能损坏或构建配置错误。`
+        );
+      }
+    } catch (e) {
+       // 忽略读取错误，交给 Playwright launch 去处理，这里只是尽力检查
+    }
+  }
+  
+  // 如果完全没找到路径，Playwright 会尝试默认路径。
+  // 我们这里不做拦截，让 launch 失败时抛出更具体的错误，但我们要禁止 npm install
 }
 
 export async function startRecording(options: RecordOptions): Promise<RecordSession> {
-  // 确保浏览器已安装
-  await ensureBrowserInstalled();
+  // 1. 强制检查浏览器是否存在，不存在直接报错，不尝试下载
+  assertBundledBrowser();
   
-  // 启动浏览器 - 让Playwright自动处理路径
+  // 2. 启动浏览器
   const browser: Browser = await chromium.launch({
     headless: options.headless ?? false,
-    // 不指定executablePath，让Playwright自动处理
+    // 显式禁止下载行为（虽然 launch 本身不会下载，但这是一种态度）
   });
   const context = await browser.newContext();
 

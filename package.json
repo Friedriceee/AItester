@@ -30,9 +30,20 @@
     },
     "files": [
       "dist/**",
-      "package.json"
+      "package.json",
+      {
+        "from": "C:/playwright-browsers",
+        "to": "playwright-browsers",
+        "filter": [
+          "**/*",
+          "!**/*mac*",
+          "!**/*darwin*",
+          "!**/chrome-mac*",
+          "!**/firefox*"
+        ]
+      }
     ],
-    "asar": true,
+    "asar": false,
     "mac": {
       "target": [
         "zip"

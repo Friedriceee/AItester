@@ -6,3 +6,4 @@ out/
 *.exe
 generated/
 aigenerate/
+playwright-browsers/

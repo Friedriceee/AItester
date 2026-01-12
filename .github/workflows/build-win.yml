@@ -51,6 +51,38 @@ jobs:
           $env:PLAYWRIGHT_BROWSERS_PATH = "C:\playwright-browsers"
           # Only install Chromium for Windows, skip macOS browsers with long paths
           npx playwright install chromium
+          
+          # 清理可能导致长路径问题的文件
+          Write-Host "Cleaning up long path files..."
+          $browsersPath = "C:\playwright-browsers"
+          
+          # 删除macOS特定文件
+          if (Test-Path $browsersPath) {
+            Write-Host "Removing macOS browser files to avoid long path issues..."
+            
+            # 删除chrome-mac目录
+            $macDirs = Get-ChildItem -Path $browsersPath -Recurse -Directory | Where-Object { $_.Name -like "*mac*" }
+            foreach ($dir in $macDirs) {
+              Write-Host "Removing macOS directory: $($dir.FullName)"
+              Remove-Item -Path $dir.FullName -Recurse -Force -ErrorAction SilentlyContinue
+            }
+            
+            # 删除firefox目录（如果存在）
+            $firefoxDirs = Get-ChildItem -Path $browsersPath -Recurse -Directory | Where-Object { $_.Name -like "*firefox*" }
+            foreach ($dir in $firefoxDirs) {
+              Write-Host "Removing Firefox directory: $($dir.FullName)"
+              Remove-Item -Path $dir.FullName -Recurse -Force -ErrorAction SilentlyContinue
+            }
+            
+            # 删除webkit目录（如果存在）
+            $webkitDirs = Get-ChildItem -Path $browsersPath -Recurse -Directory | Where-Object { $_.Name -like "*webkit*" }
+            foreach ($dir in $webkitDirs) {
+              Write-Host "Removing WebKit directory: $($dir.FullName)"
+              Remove-Item -Path $dir.FullName -Recurse -Force -ErrorAction SilentlyContinue
+            }
+            
+            Write-Host "Cleanup completed."
+          }
 
       - name: Build Windows x64 installer (no publish)
         run: |
