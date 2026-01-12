@@ -1,56 +1,58 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'node:path';
-import { startRecording, RecordSession } from '../core/record.js';
-import { generateFromIR } from '../core/generate.js';
+import fs from 'node:fs';
 
-const ensurePlaywrightPath = () => {
-  const fs = require('fs');
+let mainWindow: BrowserWindow | null = null;
+let currentSession: any = null;
 
-  // 优先选择真实存在的目录，保证相对路径在打包/开发环境均可用
+// 1) 最早设置 Playwright 浏览器路径（在任何 playwright 模块加载之前）
+function ensurePlaywrightPath() {
   const candidatePaths = app.isPackaged
     ? [
-        path.join(process.resourcesPath, 'playwright-browsers'),               // 打包后 resources 相对路径
-        path.join(app.getAppPath(), 'playwright-browsers'),                    // app 根目录（asar 外 unpacked）
+        path.join(process.resourcesPath, 'playwright-browsers'), // resources/playwright-browsers
+        path.join(process.resourcesPath, 'app.asar.unpacked', 'playwright-browsers'),
+        path.join(app.getAppPath(), 'playwright-browsers'),
       ]
     : [
-        path.join(process.cwd(), 'playwright-browsers'),                       // 开发：工作目录
-        path.join(app.getAppPath(), 'playwright-browsers'),                    // 开发：应用根目录
+        path.join(process.cwd(), 'playwright-browsers'),
+        path.join(app.getAppPath(), 'playwright-browsers'),
       ];
 
   for (const p of candidatePaths) {
     if (fs.existsSync(p)) {
       process.env.PLAYWRIGHT_BROWSERS_PATH = p;
-      console.log(`PLAYWRIGHT_BROWSERS_PATH set to: ${p}`);
+      console.log(`[pw] PLAYWRIGHT_BROWSERS_PATH = ${p}`);
       return;
     }
   }
 
-  // 如果都不存在，仍设置为首选路径便于日志诊断
+  // 不存在也强制指定，避免回退到用户缓存；方便你从日志定位打包是否带上了浏览器
   process.env.PLAYWRIGHT_BROWSERS_PATH = candidatePaths[0];
-  console.warn(`PLAYWRIGHT_BROWSERS_PATH set but path not found: ${candidatePaths[0]}`);
-};
+  console.warn(`[pw] PLAYWRIGHT_BROWSERS_PATH not found, set to ${candidatePaths[0]}`);
+}
 
-let mainWindow: BrowserWindow | null = null;
-let currentSession: RecordSession | null = null;
+// 必须在 app.whenReady 之前就调用（关键）
+ensurePlaywrightPath();
 
-// Hook console.log/error to send to renderer
+// 2) 把主进程日志转发到渲染进程（保留你原来的逻辑）
 const originalLog = console.log;
 const originalError = console.error;
 
-console.log = (...args) => {
+console.log = (...args: any[]) => {
   originalLog(...args);
   if (mainWindow && !mainWindow.isDestroyed()) {
     mainWindow.webContents.send('log-message', { type: 'info', message: args.join(' ') });
   }
 };
 
-console.error = (...args) => {
+console.error = (...args: any[]) => {
   originalError(...args);
   if (mainWindow && !mainWindow.isDestroyed()) {
     mainWindow.webContents.send('log-message', { type: 'error', message: args.join(' ') });
   }
 };
 
+// 3) 创建窗口
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
@@ -62,71 +64,59 @@ function createWindow() {
     },
   });
 
-  // 智能路径判断：根据运行环境选择正确的renderer路径，并优先基于相对路径检测
-  const getRendererPath = (): string => {
-    const fs = require('fs');
-
-    const resolveDevPaths = (): string => {
-      const devPaths = [
-        path.join(process.cwd(), 'renderer', 'index.html'),     // 工作目录相对路径
-        path.join(__dirname, '../../renderer/index.html'),      // 标准相对路径
-        path.join(__dirname, '../renderer/index.html'),         // 备用相对路径
-        path.join(app.getAppPath(), 'renderer', 'index.html'),  // 应用根路径相对
-      ];
-
-      for (const devPath of devPaths) {
-        if (fs.existsSync(devPath)) {
-          const rel = path.relative(process.cwd(), devPath) || devPath;
-          console.log(`Loading renderer from relative path: ${rel}`);
-          return devPath;
-        }
-      }
-
-      console.error('Renderer index.html not found in any expected location');
-      return devPaths[0]; // 返回第一个路径作为默认
-    };
-
-    if (app.isPackaged) {
-      // 打包环境：使用 resources/dist/renderer
-      const packagedPath = path.join(process.resourcesPath, 'dist', 'renderer', 'index.html');
-      if (fs.existsSync(packagedPath)) {
-        return packagedPath;
-      }
-      console.warn('Packaged renderer not found, falling back to relative development paths');
-      return resolveDevPaths();
-    }
-
-    // 开发环境：使用相对路径查找 renderer/index.html
-    return resolveDevPaths();
-  };
-  
   const rendererPath = getRendererPath();
   mainWindow.loadFile(rendererPath);
-  }
-  
-  // 在应用就绪前设置 Playwright 浏览器路径（打包/开发均设置）
-  ensurePlaywrightPath();
+}
 
+// 4) 你的 renderer 路径选择（整理了括号，避免语法错）
+function getRendererPath(): string {
+  const resolveDevPaths = (): string => {
+    const devPaths = [
+      path.join(process.cwd(), 'renderer', 'index.html'),
+      path.join(__dirname, '../../renderer/index.html'),
+      path.join(__dirname, '../renderer/index.html'),
+      path.join(app.getAppPath(), 'renderer', 'index.html'),
+    ];
+
+    for (const p of devPaths) {
+      if (fs.existsSync(p)) {
+        const rel = path.relative(process.cwd(), p) || p;
+        console.log(`Loading renderer from: ${rel}`);
+        return p;
+      }
+    }
+
+    console.error('Renderer index.html not found, fallback to first dev path');
+    return devPaths[0];
+  };
+
+  if (app.isPackaged) {
+    const packagedPath = path.join(process.resourcesPath, 'dist', 'renderer', 'index.html');
+    if (fs.existsSync(packagedPath)) return packagedPath;
+    console.warn('Packaged renderer not found, fallback to dev paths');
+  }
+
+  return resolveDevPaths();
+}
+
+// 5) Electron 生命周期
 app.whenReady().then(() => {
   createWindow();
 
   app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
-    }
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  if (process.platform !== 'darwin') app.quit();
 });
 
-// IPC Handlers
-ipcMain.handle('start-recording', async (event, url: string) => {
+// 6) IPC：用懒加载，确保 playwright 不会在 env 设置之前被加载
+ipcMain.handle('start-recording', async (_event, url: string) => {
   console.log(`Starting recording for: ${url}`);
   try {
+    const { startRecording } = await import('../core/record.js');
     currentSession = await startRecording({ url });
     return { success: true };
   } catch (error) {
@@ -152,9 +142,10 @@ ipcMain.handle('stop-recording', async () => {
   }
 });
 
-ipcMain.handle('generate-cases', async (event, { irPath, format, outPath }) => {
+ipcMain.handle('generate-cases', async (_event, { irPath, format, outPath }) => {
   console.log(`Generating cases from ${irPath} in format ${format} to ${outPath ?? '[default]'}`);
   try {
+    const { generateFromIR } = await import('../core/generate.js');
     await generateFromIR(irPath, format, outPath);
     return { success: true };
   } catch (error) {

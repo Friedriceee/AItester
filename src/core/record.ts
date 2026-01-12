@@ -6,7 +6,7 @@ import { AIEvent, AIR, ClickEvent, InputEvent, NavEvent } from './types.js';
 import { saveIR } from './utils.js';
 
 export interface RecordOptions {
-  url: string;
+  url: string; // 可为空字符串，表示不主动导航，由用户手动输入/跳转
   outPath?: string;
   headless?: boolean;
 }
@@ -28,15 +28,20 @@ export async function startRecording(options: RecordOptions): Promise<RecordSess
   let finished = false;
   let finalPath = '';
   let activePages = 0;
+  let firstVisitedUrl: string | null = options.url?.trim() ? options.url.trim() : null;
 
   // 统一的事件桥接：多个 page 共用同一收集逻辑
   const attachPage = async (page: Page) => {
     // Collect navigation events
     page.on('framenavigated', (frame) => {
       if (frame === page.mainFrame()) {
+        const currentUrl = page.url();
+        if (!firstVisitedUrl && currentUrl) {
+          firstVisitedUrl = currentUrl;
+        }
         events.push({
           type: 'navigation',
-          url: page.url(),
+          url: currentUrl,
           ts: Date.now(),
         } as NavEvent);
       }
@@ -142,7 +147,7 @@ export async function startRecording(options: RecordOptions): Promise<RecordSess
     const ir: AIR = {
       version: '1.0',
       meta: {
-        url: options.url,
+        url: firstVisitedUrl ?? (options.url?.trim() ? options.url.trim() : 'about:blank'),
         startedAt,
         finishedAt: Date.now(),
       },
@@ -179,7 +184,12 @@ export async function startRecording(options: RecordOptions): Promise<RecordSess
   const page: Page = await context.newPage();
   await attachPage(page);
 
-  await page.goto(options.url);
+  // 若未提供起始 URL，则停留在 about:blank，用户可手动输入跳转
+  if (options.url?.trim()) {
+    await page.goto(options.url);
+  } else {
+    firstVisitedUrl = firstVisitedUrl ?? 'about:blank';
+  }
 
   console.log('[AI Tester] Recording started.');
   console.log('[AI Tester] Press Ctrl+C to stop, or close the browser window.');

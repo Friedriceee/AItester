@@ -5,16 +5,19 @@
   "type": "module",
   "main": "dist/electron/electron/main.cjs",
   "scripts": {
-    "build": "tsc -p tsconfig.json && tsc -p tsconfig.electron.json && node scripts/copy-renderer.mjs && node -e \"const fs=require('fs');fs.copyFileSync('dist/electron/electron/main.js','dist/electron/electron/main.cjs');fs.writeFileSync('dist/electron/package.json','{\\\"type\\\":\\\"commonjs\\\"}');\"",
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.electron.json && node scripts/copy-renderer.mjs && node -e \"const fs=require('fs');fs.copyFileSync('dist/electron/electron/main.js','dist/electron/electron/main.cjs');fs.writeFileSync('dist/electron/package.json','{\\\\\\\"type\\\\\\\":\\\\\\\"commonjs\\\\\\\",\\\\\\\"main\\\\\\\":\\\\\\\"electron/main.cjs\\\\\\\"}');\"",
     "dev": "ts-node src/cli.ts",
     "electron:dev": "npm run build && electron .",
     "record": "ts-node src/cli.ts record",
     "generate": "ts-node src/cli.ts generate",
     "replay": "ts-node src/cli.ts replay",
-    "pack": "npm run build && electron-builder --dir",
-    "dist:mac": "npm run build && electron-builder --mac zip",
-    "dist:win": "npm run build && electron-builder --win nsis",
-    "dist:all": "npm run build && electron-builder -m -w"
+
+    "pw:install": "cross-env PLAYWRIGHT_BROWSERS_PATH=playwright-browsers npx playwright install chromium",
+
+    "pack": "npm run pw:install && npm run build && electron-builder --dir",
+    "dist:mac": "npm run pw:install && npm run build && electron-builder --mac zip",
+    "dist:win": "npm run pw:install && npm run build && electron-builder --win nsis",
+    "dist:all": "npm run pw:install && npm run build && electron-builder -m -w"
   },
   "bin": {
     "ai-tester": "dist/cli.js"
@@ -36,6 +39,9 @@
       }
     ],
     "asar": true,
+    "asarUnpack": [
+      "**/playwright-browsers/**"
+    ],
     "mac": {
       "target": [
         "zip"
@@ -65,6 +71,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
+    "cross-env": "^10.1.0",
     "electron": "^39.2.7",
     "electron-builder": "^26.0.12",
     "ts-node": "^10.9.2",
