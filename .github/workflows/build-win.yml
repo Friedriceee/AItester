@@ -45,17 +45,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright browsers
+      - name: Install Playwright browsers (Windows only)
         run: |
           # Set environment variable for long paths
           $env:PLAYWRIGHT_BROWSERS_PATH = "C:\playwright-browsers"
-          npm run pw:install
+          # Only install Chromium for Windows, skip macOS browsers with long paths
+          npx playwright install chromium
 
       - name: Build Windows x64 installer (no publish)
         run: |
           # Set environment variable for long paths during build
           $env:PLAYWRIGHT_BROWSERS_PATH = "C:\playwright-browsers"
-          npm run dist:win -- --x64 --publish=never
+          npm run build
+          # Build without including problematic browser files
+          npx electron-builder --win nsis --x64 --publish=never
         env:
           PLAYWRIGHT_BROWSERS_PATH: C:\playwright-browsers
 
