@@ -30,24 +30,9 @@
     },
     "files": [
       "dist/**",
-      "package.json",
-      "!playwright-browsers/chromium-1200/chrome-mac-arm64/Google Chrome for Testing.app/**"
-    ],
-    "extraResources": [
-      {
-        "from": "playwright-browsers",
-        "to": "playwright-browsers",
-        "filter": [
-          "**/*",
-          "!chromium-1200/chrome-mac-arm64/Google Chrome for Testing.app/**"
-        ]
-      }
+      "package.json"
     ],
     "asar": true,
-    "asarUnpack": [
-      "**/playwright-browsers/**",
-      "!**/chromium-1200/chrome-mac-arm64/Google Chrome for Testing.app/**"
-    ],
     "mac": {
       "target": [
         "zip"

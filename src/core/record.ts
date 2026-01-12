@@ -2,6 +2,7 @@ import { chromium } from 'playwright';
 import type { Browser, Page } from 'playwright';
 import fs from 'node:fs';
 import path from 'node:path';
+import { execSync } from 'child_process';
 import { AIEvent, AIR, ClickEvent, InputEvent, NavEvent } from './types.js';
 import { saveIR } from './utils.js';
 
@@ -15,11 +16,71 @@ export interface RecordSession {
   stop: () => Promise<string>;
 }
 
+// 确保浏览器已安装，如果没有则自动安装
+async function ensureBrowserInstalled(): Promise<void> {
+  try {
+    // 尝试启动浏览器检查是否已安装
+    const browser = await chromium.launch({ headless: true });
+    await browser.close();
+    console.log('[AI Tester] Browser already installed.');
+  } catch (error: any) {
+    if (error.message && error.message.includes('Executable doesn\'t exist')) {
+      console.log('[AI Tester] Browser not found, installing...');
+      try {
+        // 在Electron环境中，使用用户数据目录作为浏览器安装位置
+        let browsersPath = 'playwright-browsers';
+        if (process.versions?.electron) {
+          try {
+            const { app } = require('electron') as typeof import('electron');
+            browsersPath = path.join(app.getPath('userData'), 'playwright-browsers');
+          } catch {
+            browsersPath = path.join(process.cwd(), 'playwright-browsers');
+          }
+        }
+        
+        // 设置环境变量并安装浏览器
+        process.env.PLAYWRIGHT_BROWSERS_PATH = browsersPath;
+        console.log(`[AI Tester] Installing browser to: ${browsersPath}`);
+        
+        // 使用Playwright CLI安装Chromium
+        execSync('npx playwright install chromium', {
+          stdio: 'inherit',
+          env: { ...process.env, PLAYWRIGHT_BROWSERS_PATH: browsersPath }
+        });
+        
+        console.log('[AI Tester] Browser installation completed.');
+      } catch (installError: any) {
+        console.error('[AI Tester] Failed to install browser:', installError.message);
+        throw new Error(`无法安装浏览器: ${installError.message}`);
+      }
+    } else {
+      throw error;
+    }
+  }
+}
+
 export async function startRecording(options: RecordOptions): Promise<RecordSession> {
-  // Playwright 会依据 PLAYWRIGHT_BROWSERS_PATH 自动解析内置浏览器
-  // 运行时不再硬编码 executablePath，避免版本/目录变动导致失败
+  // 确保浏览器已安装
+  await ensureBrowserInstalled();
+  
+  // 根据环境变量确定浏览器路径
+  let executablePath: string | undefined;
+  if (process.env.PLAYWRIGHT_BROWSERS_PATH) {
+    // 根据平台确定正确的可执行文件路径
+    const platform = process.platform;
+    if (platform === 'win32') {
+      executablePath = path.join(process.env.PLAYWRIGHT_BROWSERS_PATH, 'chromium-1200', 'chrome-win64', 'chrome.exe');
+    } else if (platform === 'darwin') {
+      executablePath = path.join(process.env.PLAYWRIGHT_BROWSERS_PATH, 'chromium-1200', 'chrome-mac-arm64', 'Google Chrome for Testing.app', 'Contents', 'MacOS', 'Google Chrome for Testing');
+    } else {
+      executablePath = path.join(process.env.PLAYWRIGHT_BROWSERS_PATH, 'chromium-1200', 'chrome-linux', 'chrome');
+    }
+  }
+
+  // 启动浏览器
   const browser: Browser = await chromium.launch({
     headless: options.headless ?? false,
+    executablePath: executablePath,
   });
   const context = await browser.newContext();
 
