@@ -19,8 +19,27 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
+      - name: Configure Windows for long paths
+        run: |
+          # Enable long path support in Windows
+          New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
+          
+          # Verify the setting
+          Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled"
+          
+          # Set Git to handle long paths
+          git config --system core.longpaths true
+          
+          # Verify Git config
+          git config --get core.longpaths
+
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Use sparse checkout to avoid long paths if possible
+          sparse-checkout: |
+            /*
+            !playwright-browsers/
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -31,13 +50,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-    
-      - name: Install Playwright browsers into project folder
-        run: npm run pw:install
+      - name: Install Playwright browsers
+        run: |
+          # Set environment variable for long paths
+          $env:PLAYWRIGHT_BROWSERS_PATH = "C:\playwright-browsers"
+          npm run pw:install
 
-     
       - name: Build Windows x64 installer (no publish)
-        run: npm run dist:win -- --x64 --publish=never
+        run: |
+          # Set environment variable for long paths during build
+          $env:PLAYWRIGHT_BROWSERS_PATH = "C:\playwright-browsers"
+          npm run dist:win -- --x64 --publish=never
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: C:\playwright-browsers
 
       - name: Upload installer artifact
         uses: actions/upload-artifact@v4
