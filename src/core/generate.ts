@@ -88,6 +88,8 @@ async function generateSmartTestCases(ir: AIR): Promise<SmartTestCase[]> {
    - 必填为空 → 保存失败并提示"不能为空/请填写"
    - 数值 0/负数/非数字（按字段类型取其一）→ 保存失败并提示"需大于0/请输入大于0的整数"
 5) 预期结果写可验证点：保存成功/失败提示、再次进入页面的配置回显、前端展示或下单流程变化。
+6) 绝对不允许输出空数组 []，至少输出 5 条用例。
+7) 如果信息不足，请合理补全业务步骤，也必须输出用例。
 
 【用户操作记录】
 ${eventsDescription}
@@ -118,6 +120,10 @@ ${eventsDescription}
     const jsonStr = cleanResponse.substring(jsonStart, jsonEnd);
     const testCases = JSON.parse(jsonStr) as SmartTestCase[];
     
+    if (!Array.isArray(testCases) || testCases.length === 0) {
+      throw new Error('AI 返回空用例数组 []');
+    }
+
     return testCases;
   } catch (error) {
     console.error('解析智能测试用例失败:', error);
