@@ -5,36 +5,71 @@ import fs from 'node:fs';
 let mainWindow: BrowserWindow | null = null;
 let currentSession: any = null;
 
-// 1) 最早设置 Playwright 浏览器路径（在任何 playwright 模块加载之前）
+/**
+ * 检查目录是否存在
+ */
+function dirExists(p: string): boolean {
+  try {
+    return fs.existsSync(p) && fs.statSync(p).isDirectory();
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * 最早设置 Playwright 浏览器路径（在任何 playwright 模块加载之前）
+ * 目标：在打包后，也能找到你随包带的 browsers 目录
+ */
 function ensurePlaywrightPath() {
-  const candidatePaths = app.isPackaged
-    ? [
-        path.join(process.resourcesPath, 'playwright-browsers'), // resources/playwright-browsers
-        path.join(process.resourcesPath, 'app.asar.unpacked', 'playwright-browsers'),
-        path.join(app.getAppPath(), 'playwright-browsers'),
-      ]
-    : [
-        path.join(process.cwd(), 'playwright-browsers'),
-        path.join(app.getAppPath(), 'playwright-browsers'),
-      ];
+  const packagedCandidates = [
+    // resources/app/playwright-browsers
+    path.join(process.resourcesPath, 'app', 'playwright-browsers'),
+
+    // app.asar.unpacked/app/playwright-browsers
+    path.join(process.resourcesPath, 'app.asar.unpacked', 'app', 'playwright-browsers'),
+
+    // 保留，兼容旧结构
+    path.join(process.resourcesPath, 'playwright-browsers'),
+    path.join(process.resourcesPath, 'app.asar.unpacked', 'playwright-browsers'),
+
+    // 有些场景会把资源放到 appPath 下
+    path.join(app.getAppPath(), 'playwright-browsers'),
+  ];
+
+  const devCandidates = [
+    path.join(process.cwd(), 'playwright-browsers'),
+    path.join(app.getAppPath(), 'playwright-browsers'),
+  ];
+
+  const candidatePaths = app.isPackaged ? packagedCandidates : devCandidates;
+
+  // 把候选路径都打出来（你 UI 里能看到）
+  console.log('[pw] app.isPackaged =', app.isPackaged);
+  console.log('[pw] process.resourcesPath =', process.resourcesPath);
+  console.log('[pw] app.getAppPath() =', app.getAppPath());
+  console.log('[pw] candidates:\n' + candidatePaths.join('\n'));
 
   for (const p of candidatePaths) {
-    if (fs.existsSync(p)) {
+    if (dirExists(p)) {
       process.env.PLAYWRIGHT_BROWSERS_PATH = p;
-      console.log(`[pw] PLAYWRIGHT_BROWSERS_PATH = ${p}`);
+      console.log(`[pw] ✅ Using PLAYWRIGHT_BROWSERS_PATH = ${p}`);
       return;
     }
   }
 
-  // 不存在也强制指定，避免回退到用户缓存；方便你从日志定位打包是否带上了浏览器
-  process.env.PLAYWRIGHT_BROWSERS_PATH = candidatePaths[0];
-  console.warn(`[pw] PLAYWRIGHT_BROWSERS_PATH not found, set to ${candidatePaths[0]}`);
+  // ❗关键改动：找不到就不要强行指到一个不存在的目录
+  // 否则 Playwright 会直接报 “Browser directory not found ...”
+  console.error('[pw] ❌ No bundled Playwright browsers directory found.');
+  console.error('[pw] ❌ Will NOT set PLAYWRIGHT_BROWSERS_PATH (fallback to Playwright default cache).');
+
+  // 如果你之前设置过环境变量，这里清掉，避免污染
+  delete process.env.PLAYWRIGHT_BROWSERS_PATH;
 }
 
 // 必须在 app.whenReady 之前就调用（关键）
 ensurePlaywrightPath();
 
-// 2) 把主进程日志转发到渲染进程（保留你原来的逻辑）
+// 把主进程日志转发到渲染进程
 const originalLog = console.log;
 const originalError = console.error;
 
@@ -52,7 +87,7 @@ console.error = (...args: any[]) => {
   }
 };
 
-// 3) 创建窗口
+// 创建窗口
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
@@ -68,7 +103,7 @@ function createWindow() {
   mainWindow.loadFile(rendererPath);
 }
 
-// 4) 你的 renderer 路径选择（整理了括号，避免语法错）
+// renderer 路径选择
 function getRendererPath(): string {
   const resolveDevPaths = (): string => {
     const devPaths = [
@@ -99,7 +134,7 @@ function getRendererPath(): string {
   return resolveDevPaths();
 }
 
-// 5) Electron 生命周期
+// Electron 生命周期
 app.whenReady().then(() => {
   createWindow();
 
@@ -112,7 +147,7 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
-// 6) IPC：用懒加载，确保 playwright 不会在 env 设置之前被加载
+// IPC：懒加载，确保 playwright 不会在 env 设置之前被加载
 ipcMain.handle('start-recording', async (_event, url: string) => {
   console.log(`Starting recording for: ${url}`);
   try {
