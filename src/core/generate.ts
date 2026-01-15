@@ -10,7 +10,7 @@ async function callDeepSeekAPI(prompt: string): Promise<string> {
 
   try {
     const response = await axios.post(`${endpoint}/chat/completions`, {
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4o-mini',
       messages: [
         {
           role: 'user',
